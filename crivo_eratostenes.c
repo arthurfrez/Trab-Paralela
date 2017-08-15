@@ -1,7 +1,24 @@
+/*******************************************************************************
+ * crivo_eratostenes.c
+ * Arthur Floresta Rezende - 476068
+ * 
+ * Implementação do Crivo de Eratostenes em c, usando manipulação de bits
+ * para lidas com a grande quatidade de mémoria necessária para executar-lo.
+ * 
+ * Exemplo de entrada: 1000000000
+ * Saida esperada: 50847534
+ ******************************************************************************/
+
+//==============================================================================
+// BIBLIOTECAS
+//==============================================================================
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 
+//==============================================================================
+// CONTANTES
+//==============================================================================
 unsigned short NUM_BITS;
 unsigned int* is_prime;
 long arr_size;
@@ -51,12 +68,14 @@ void set_bit(long pos) {
 // solve: resolve o problema
 //------------------------------------------------------------------------------
 long solve(long size) {
-  long answer = 0;
+  long answer = 1; // contando o 2
 
-  set_bit(1);
   set_bit(0);
-
-  for(long i = 2; i < size; i++) {
+  set_bit(1);
+  set_bit(2);
+    
+  // loop ignorando numeros pares
+  for(long i = 3; i < size; i+=2) {
     if(!get_bit(i)) {
       answer++;
       for(long j = i; j < size; j = j+i) set_bit(j);
