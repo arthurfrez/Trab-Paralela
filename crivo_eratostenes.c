@@ -3,7 +3,10 @@
  * Arthur Floresta Rezende - 476068
  * 
  * Implementação do Crivo de Eratostenes em c, usando manipulação de bits
- * para lidas com a grande quatidade de mémoria necessária para executar-lo.
+ * para lidar com a grande quatidade de memoria necessaria para executar-lo.
+ *
+ * Otimizacoes: Ignorando numeros pares durante a iteracao principal e assim,
+ * reduzindo o numero de iteracoes pela metade.
  * 
  * Exemplo de entrada: 1000000000
  * Saida esperada: 50847534
