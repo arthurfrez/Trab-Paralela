@@ -53,7 +53,7 @@ int get_bit(long pos) {
   unsigned long bit_index = pos % NUM_BITS;
   unsigned long bit_mask = ( 1 << bit_index);
 
-  return ((is_prime[byte_index] & bit_mask) != 0);
+  return ((is_prime[byte_index] & bit_mask) == 0);
 }
 
 //------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ long solve(long size) {
     
   // loop ignorando numeros pares
   for(long i = 3; i < size; i+=2) {
-    if(!get_bit(i)) {
+    if(get_bit(i)) {
       answer++;
       for(long j = i; j < size; j = j+i) set_bit(j);
     }
