@@ -1,13 +1,16 @@
 /*******************************************************************************
  * crivo_eratostenes.c
  * Arthur Floresta Rezende - 476068
- * 
+ *
  * Implementação do Crivo de Eratostenes em c, usando manipulação de bits
  * para lidar com a grande quatidade de memoria necessaria para executar-lo.
  *
- * Otimizacoes: Ignorando numeros pares durante a iteracao principal e assim,
+ * Otimizacoes e correcoes:
+ * 1) Ignorando numeros pares durante a iteracao principal e assim,
  * reduzindo o numero de iteracoes pela metade.
- * 
+ * 2) Resolvido problemas com numeros impares e excecos com as entradas 0 e 1.
+ *
+ *
  * Exemplo de entrada: 1000000000
  * Saida esperada: 50847534
  ******************************************************************************/
@@ -76,9 +79,9 @@ long solve(long size) {
   set_bit(0);
   set_bit(1);
   set_bit(2);
-    
+
   // loop ignorando numeros pares
-  for(long i = 3; i < size; i+=2) {
+  for(long i = 3; i <= size; i+=2) {
     if(get_bit(i)) {
       answer++;
       for(long j = i; j < size; j = j+i) set_bit(j);
@@ -95,9 +98,14 @@ int main() {
   long n, answer;
   scanf("%ld", &n);
 
-  calculate_bits();
-  init_bit_array(n);
-  answer = solve(n);
+  if(n == 0 || n == 1) {
+    answer = 0;
+  }
+  else {
+    calculate_bits();
+    init_bit_array(n);
+    answer = solve(n);
+  }
 
   printf("%ld\n", answer);
 
